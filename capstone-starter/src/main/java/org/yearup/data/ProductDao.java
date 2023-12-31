@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ProductDao
 {
-    List<Product> search(Integer categoryId, BigDecimal minPrice, BigDecimal maxPrice, String color);
+    List<Product> search(Integer categoryId, BigDecimal minPrice, BigDecimal maxPrice, String color, String name);
     List<Product> listByCategoryId(int categoryId);
     Product getById(int productId);
     Product create(Product product);
