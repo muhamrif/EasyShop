@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DatabaseConfig
 {
-    private BasicDataSource basicDataSource;
+    private final BasicDataSource basicDataSource;
 
     @Bean
     public BasicDataSource dataSource()
