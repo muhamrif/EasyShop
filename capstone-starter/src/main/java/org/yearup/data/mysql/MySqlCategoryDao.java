@@ -108,11 +108,8 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
             preparedStatement.setString(2, category.getDescription());
             preparedStatement.setInt(3, categoryId);
 
-            int rows = preparedStatement.executeUpdate();
+            preparedStatement.executeUpdate();
 
-            if (rows == 0) {
-                throw new SQLException("Update failed, no rows affected!");
-            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -127,14 +124,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
            preparedStatement.setInt(1, categoryId);
-
-           int rows = preparedStatement.executeUpdate();
-
-           if (rows == 0) {
-               throw new SQLException("Delete failed, no rows affected!");
-           }else{
-               System.out.println("Category deleted successfully! "+ rows + " row(s) affected" );
-           }
+           preparedStatement.executeUpdate();
 
        } catch (SQLException e) {
            e.printStackTrace();
