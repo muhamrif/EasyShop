@@ -26,14 +26,14 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
         String sql = "SELECT * FROM products " +
                 "WHERE (category_id = ? OR ? = -1) " +
                 "   AND (price >= ? OR ? = -1) " +
-                "   AND (price <= ? OR ? = 1501) " +
+                "   AND (price <= ? OR ? = -1) " +
                 "   AND (color = ? OR ? = '') " +
                 "   AND (name = ? OR ? = '') ";
 
         name = name == null? "": name.trim().toLowerCase();
         categoryId = categoryId == null ? -1 : categoryId;
         minPrice = minPrice == null ? new BigDecimal("-1") : minPrice;
-        maxPrice = maxPrice == null ? new BigDecimal("1500") : maxPrice;
+        maxPrice = maxPrice == null ? new BigDecimal("-1") : maxPrice;
         color = color == null ? "" : color.trim().toLowerCase();
 
         try (Connection connection = getConnection())

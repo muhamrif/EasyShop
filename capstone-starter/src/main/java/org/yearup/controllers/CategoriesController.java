@@ -40,19 +40,19 @@ public class CategoriesController
     @GetMapping("{id}")
     @PreAuthorize("permitAll()")
     public Category getById(@PathVariable int id) {
-        Category category = categoryDao.getById(id);
-        try {
-            if (category.getName() != null) {
-                return category;
-            }
-        } catch (Exception ex) {
-            if (category == null) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "category not found");
-            } else {
-                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
-            }
+
+        Category category = null;
+        try{
+            category = categoryDao.getById(id);
+
+        }catch(Exception ex){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,"not working");
         }
-    return null;
+
+        if(category == null)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+
+        return category;
     }
 
 
