@@ -26,7 +26,7 @@ Full stack e-commerce application that allows users to browse products, add them
 ![highlevelcodebreakdown.png](images%2Fhighlevelcodebreakdown.png)
 
 ## Api Endpoints
-![endpoints.png](images%2Fendpoints.png)
+![Untitled-2024-01-05-0314.png](images%2FUntitled-2024-01-05-0314.png)![endpoints.png](images%2Fendpoints.png)
 
 ## Postman Collection 
 ![Postman.gif](images%2FPostman.gif)
