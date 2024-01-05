@@ -95,6 +95,13 @@ class ShoppingCartService {
         button.addEventListener("click", () => this.clearCart());
         cartHeader.appendChild(button)
 
+        const button2 = document.createElement("button");
+        button2.classList.add("btn")
+        button2.classList.add("btn-danger")
+        button2.innerText = "Checkout";
+        button2.addEventListener("click", () => this.checkoutCart());
+        cartHeader.appendChild(button2)
+
         contentDiv.appendChild(cartHeader)
         main.appendChild(contentDiv);
 
@@ -133,13 +140,18 @@ class ShoppingCartService {
         descriptionDiv.innerText = item.product.description;
         outerDiv.appendChild(descriptionDiv);
 
-        let quantityDiv = document.createElement("div")
+        let quantityDiv = document.createElement("h4")
         quantityDiv.innerText = `Quantity: ${item.quantity}`;
         outerDiv.appendChild(quantityDiv)
 
 
         parent.appendChild(outerDiv);
+      
     }
+
+    
+    
+    
 
     clearCart()
     {
@@ -170,6 +182,20 @@ class ShoppingCartService {
                  };
 
                  templateBuilder.append("error", data, "errors")
+             })
+    }
+
+    checkoutCart()
+    {
+
+        const url = `${config.baseUrl}/orders`;
+
+        axios.post(url)
+             .then(response => {
+                this.clearCart()
+             })
+             .catch(error => {
+
              })
     }
 

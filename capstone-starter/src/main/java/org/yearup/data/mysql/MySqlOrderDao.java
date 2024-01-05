@@ -28,7 +28,6 @@ public class MySqlOrderDao extends MySqlDaoBase implements OrderDao {
 
         try (Connection connection = this.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-
             preparedStatement.setInt(1, userId);
             preparedStatement.setDate(2, Date.valueOf(LocalDate.now()));
             preparedStatement.setString(3, profile.getAddress());
@@ -36,8 +35,6 @@ public class MySqlOrderDao extends MySqlDaoBase implements OrderDao {
             preparedStatement.setString(5, profile.getState());
             preparedStatement.setString(6, profile.getZip());
             preparedStatement.setBigDecimal(7, shoppingCart.getTotal());
-
-
             int rows = preparedStatement.executeUpdate();
             try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
@@ -50,10 +47,8 @@ public class MySqlOrderDao extends MySqlDaoBase implements OrderDao {
         }
 
         String query2 = "INSERT INTO order_line_items (order_id, product_id,sales_price, quantity, discount) VALUES (?, ?, ?, ?, ?)";
-
         try(Connection connection = this.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS)) {
-
             for (ShoppingCartItem item : shoppingCart.returnAsList()) {
                 preparedStatement.setInt(1, orderId);
                 preparedStatement.setInt(2, item.getProduct().getProductId());
@@ -62,14 +57,8 @@ public class MySqlOrderDao extends MySqlDaoBase implements OrderDao {
                 preparedStatement.setBigDecimal(5, item.getDiscountPercent());
                 preparedStatement.executeUpdate();
             }
-
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
-
-
     }
 }
